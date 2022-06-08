@@ -20,6 +20,9 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
+  redis:
+    host: localhost
+    port: 6379
 #logging:
 #  level:
 #    org.hibernate.SQL: debug
@@ -31,7 +34,7 @@ decorator:
 jwt:
   header: Authorization
   #HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
-  #echo 'silvernine-tech-spring-boot-jwt-tutorial-secret-silvernine-tech-spring-boot-jwt-tutorial-secret'|base64
-  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
-  token-validity-in-seconds: 3600
-  refresh-token-validity-in-seconds: 86400
+  # echo 'swimming-spring-boot-security-jwt-secret-value-create-with-base64-encode-swimming-spring-boot-security-jwt-secret-value-create-with-base64-encode'|base64
+  secret: c3dpbW1pbmctc3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXNlY3JldC12YWx1ZS1jcmVhdGUtd2l0aC1iYXNlNjQtZW5jb2RlLXN3aW1taW5nLXNwcmluZy1ib290LXNlY3VyaXR5LWp3dC1zZWNyZXQtdmFsdWUtY3JlYXRlLXdpdGgtYmFzZTY0LWVuY29kZQo=
+  token-validity-in-seconds: 600
+  refresh-token-validity-in-seconds: 3600
