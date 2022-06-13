@@ -45,10 +45,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring()
                 .antMatchers(
-                        "/h2/**"
-                        ,"/favicon.ico"
-                        ,"/error"
-                );
+                        "/h2/**",
+                        "/favicon.ico",
+                        "/error"
+                )
+                .antMatchers(
+                        "/v2/api-docs",
+                        "/swagger-resources/**",
+                        "/swagger-ui/**",
+                        "/webjars/**",
+                        "/swagger/**");
     }
 
     @Override
