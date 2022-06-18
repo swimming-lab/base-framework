@@ -41,3 +41,9 @@ jwt:
   secret: c3dpbW1pbmctc3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXNlY3JldC12YWx1ZS1jcmVhdGUtd2l0aC1iYXNlNjQtZW5jb2RlLXN3aW1taW5nLXNwcmluZy1ib290LXNlY3VyaXR5LWp3dC1zZWNyZXQtdmFsdWUtY3JlYXRlLXdpdGgtYmFzZTY0LWVuY29kZQo=
   token-validity-in-seconds: 600
   refresh-token-validity-in-seconds: 3600
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+  override-with-generic-response: false

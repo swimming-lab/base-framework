@@ -1,49 +1,36 @@
 package com.swm.baseframework.base.config;
 
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springdoc.core.SpringDocUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collections;
 
 @Configuration
 public class SwaggerConfig {
 
-    private ApiInfo swaggerInfo() {
-        return new ApiInfoBuilder()
-                .title("SWM API")
-                .description("SWM API Docs")
-                .build();
-    }
-
     @Bean
-    public Docket swaggerApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .consumes(getConsumeContentTypes())
-                .produces(getProduceContentTypes())
-                .apiInfo(swaggerInfo()).select()
-                .apis(RequestHandlerSelectors.basePackage("com.swm.baseframework.app.member.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .useDefaultResponseMessages(false);
-    }
+    public OpenAPI swaggerOpenAPI() {
+        SpringDocUtils.getConfig().replaceWithClass(org.springframework.data.domain.Pageable.class,
+                org.springdoc.core.converters.models.Pageable.class);
 
-    private Set<String> getConsumeContentTypes() {
-        Set<String> consumes = new HashSet<>();
-        consumes.add("application/json;charset=UTF-8");
-        consumes.add("application/x-www-form-urlencoded");
-        return consumes;
-    }
+        Info info = new Info().title("SWM API")
+                .description("SWM API Docs")
+                .version("v1");
 
-    private Set<String> getProduceContentTypes() {
-        Set<String> produces = new HashSet<>();
-        produces.add("application/json;charset=UTF-8");
-        return produces;
+        SecurityScheme securityScheme = new SecurityScheme()
+                .type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
+                .in(SecurityScheme.In.HEADER).name("Authorization");
+        SecurityRequirement securityRequirement = new SecurityRequirement().addList("bearerAuth");
+
+        return new OpenAPI()
+                .info(info)
+                .components(new Components().addSecuritySchemes("bearerAuth",securityScheme))
+                .security(Collections.singletonList(securityRequirement));
     }
 }

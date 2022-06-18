@@ -46,8 +46,8 @@ dependencies {
 	// p6spy
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.7.1'
 
-	// swagger
-	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	// openapi(swagger)
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
 
 	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
